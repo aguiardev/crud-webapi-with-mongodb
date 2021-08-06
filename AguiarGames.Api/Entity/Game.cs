@@ -22,5 +22,20 @@ namespace AguiarGames.Api.Entity
 
         [BsonElement("price")]
         public decimal Price { get; set; }
+
+        [BsonElement("imagesUrl")]
+        public string[] ImagesUrl { get; set; }
+
+        [BsonElement("priceHistory")]
+        public PriceHistory[] PriceHistory { get; set; }
+    }
+
+    public class PriceHistory
+    {
+        [BsonElement("price")]
+        public decimal Price { get; set; }
+
+        [BsonElement("date")]
+        public DateTime Date { get; set; }
     }
 }
