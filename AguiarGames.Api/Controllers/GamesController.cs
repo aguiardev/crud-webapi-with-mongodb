@@ -40,7 +40,7 @@ namespace AguiarGames.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             if(id <= 0)
-                return BadRequest("Invalid customer id");
+                return BadRequest("Invalid game id");
 
             var game = await _gameRepository.GetById(id);
             
@@ -65,7 +65,7 @@ namespace AguiarGames.Api.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] Game game)
         {
             if(id <= 0)
-                return BadRequest("Invalid customer id");
+                return BadRequest("Invalid game id");
 
             var currentGame = await _gameRepository.GetById(id);
             if(currentGame == null)
@@ -80,7 +80,7 @@ namespace AguiarGames.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if(id <= 0)
-                return BadRequest("Invalid customer id");
+                return BadRequest("Invalid game id");
 
             var currentGame = await _gameRepository.GetById(id);
             if(currentGame == null)
