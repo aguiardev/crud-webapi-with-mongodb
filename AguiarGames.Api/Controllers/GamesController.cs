@@ -30,7 +30,7 @@ namespace AguiarGames.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var games = await _gameRepository.GetAll();
+            var games = await _gameRepository.GetAllAsync();
             
             return games == null || !games.Any()
                 ? NotFound()
@@ -43,7 +43,7 @@ namespace AguiarGames.Api.Controllers
             if(string.IsNullOrEmpty(id))
                 return BadRequest("Invalid game id");
 
-            var game = await _gameRepository.GetById(id);
+            var game = await _gameRepository.GetByIdAsync(id);
             
             return game == null
                 ? NotFound()
@@ -53,7 +53,7 @@ namespace AguiarGames.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Game game)
         {
-            await _gameRepository.Create(game);
+            await _gameRepository.CreateAsync(game);
 
             return CreatedAtAction(
                 nameof(GetById),
@@ -68,11 +68,11 @@ namespace AguiarGames.Api.Controllers
             if(string.IsNullOrEmpty(id))
                 return BadRequest("Invalid game id");
 
-            var currentGame = await _gameRepository.GetById(id);
+            var currentGame = await _gameRepository.GetByIdAsync(id);
             if(currentGame == null)
                 return NotFound();
 
-            await _gameRepository.Update(id, game);
+            await _gameRepository.UpdateAsync(id, game);
 
             return NoContent();
         }
@@ -83,11 +83,11 @@ namespace AguiarGames.Api.Controllers
             if(string.IsNullOrEmpty(id))
                 return BadRequest("Invalid game id");
 
-            var currentGame = await _gameRepository.GetById(id);
+            var currentGame = await _gameRepository.GetByIdAsync(id);
             if(currentGame == null)
                 return NotFound();
 
-            await _gameRepository.Delete(id);
+            await _gameRepository.DeleteAsync(id);
 
             return NoContent();
         }

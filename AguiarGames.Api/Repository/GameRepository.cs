@@ -15,19 +15,19 @@ namespace AguiarGames.Api.Repository
             
         }
 
-        public async Task<IList<Game>> GetAll()
+        public async Task<IList<Game>> GetAllAsync()
             => await _collection.Find(c => true).ToListAsync();
         
-        public async Task<Game> GetById(string id)
+        public async Task<Game> GetByIdAsync(string id)
             => await _collection.Find(document => document.Id == id).FirstOrDefaultAsync();
 
-        public async Task Create(Game game)
+        public async Task CreateAsync(Game game)
             => await _collection.InsertOneAsync(game);
 
-        public async Task Delete(string id)
+        public async Task DeleteAsync(string id)
             => await _collection.DeleteOneAsync(c => c.Id == id);
 
-        public async Task Update(string id, Game game)
+        public async Task UpdateAsync(string id, Game game)
             => await _collection.ReplaceOneAsync(c => c.Id == id, game);
     }
 }
