@@ -50,6 +50,20 @@ namespace AguiarGames.Api.Controllers
                 : Ok(game);
         }
 
+        [HttpGet("query")]
+        public async Task<IActionResult> GetByFilters(
+            [FromQuery] string title, [FromQuery] DateTime? release, [FromQuery] bool? offer, [FromQuery] decimal? price)
+        {
+            if(string.IsNullOrEmpty(title) && !release.HasValue && !offer.HasValue && !price.HasValue)
+                return BadRequest("Filter is required");
+
+            var game = await _gameRepository.GetByFiltersAsync(title, release, offer, price);
+            
+            return game == null
+                ? NotFound()
+                : Ok(game);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Game game)
         {
