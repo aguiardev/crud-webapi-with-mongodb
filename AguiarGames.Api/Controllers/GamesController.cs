@@ -2,6 +2,7 @@
 using AguiarGames.Api.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,9 +38,9 @@ namespace AguiarGames.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(string id)
         {
-            if(id <= 0)
+            if(string.IsNullOrEmpty(id))
                 return BadRequest("Invalid game id");
 
             var game = await _gameRepository.GetById(id);
@@ -62,9 +63,9 @@ namespace AguiarGames.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Game game)
+        public async Task<IActionResult> Put(string id, [FromBody] Game game)
         {
-            if(id <= 0)
+            if(string.IsNullOrEmpty(id))
                 return BadRequest("Invalid game id");
 
             var currentGame = await _gameRepository.GetById(id);
@@ -77,9 +78,9 @@ namespace AguiarGames.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            if(id <= 0)
+            if(string.IsNullOrEmpty(id))
                 return BadRequest("Invalid game id");
 
             var currentGame = await _gameRepository.GetById(id);

@@ -7,9 +7,9 @@ namespace AguiarGames.Api.Repository.Interface
     public interface IGameRepository
     {
         Task<IList<Game>> GetAll();
-        Task<Game> GetById(int id);
+        Task<Game> GetById(string id);
         Task Create(Game customer);
-        Task Update(int id, Game customer);
-        Task Delete(int id);
+        Task Update(string id, Game customer);
+        Task Delete(string id);
     }
 }
